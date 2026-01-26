@@ -11,9 +11,11 @@
     "dev:back": "npm --workspace backend run dev",
     "build:front": "npm --workspace frontend run build",
     "dev": "bash scripts/dev.sh"
-
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.30.3"
   }
 }
