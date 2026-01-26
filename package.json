@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "install:all": "npm install --workspaces",
+    "dev:front": "npm --workspace frontend run dev",
+    "dev:back": "npm --workspace backend run dev",
+    "build:front": "npm --workspace frontend run build",
+    "dev": "bash scripts/dev.sh"
+
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

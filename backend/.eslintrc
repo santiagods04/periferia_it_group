@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "rules": {
+    "no-underscore-dangle": "off",
+    "no-console": "off",
+    "linebreak-style": ["error", "windows"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+  }
+}
