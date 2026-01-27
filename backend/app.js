@@ -13,7 +13,7 @@ const seedUsers = require('./scripts/seed');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, MONGO_URI, NODE_ENV } = process.env;
+const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors());

@@ -11,7 +11,7 @@ const Home = () => {
       <div className="home__container">
         {posts.length > 0 ? (
           posts.map((post) => (
-            <article className="home__card" key={post._id}>
+            <article className="home__card" key={post.id}>
               <h2 className="home__card-title">Publicación</h2>
 
               <p className="home__card-message">
