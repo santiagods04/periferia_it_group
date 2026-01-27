@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
-
-const authRouter = require('./routes/auth');
-const userRouter = require('./routes/users');
-const postsRouter = require('./routes/posts')
 const auth = require('./middlewares/auth');
-const seedUsers = require('./scripts/seed');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
+const seedUsers = require('./scripts/seed');
+
 
 const { PORT = 3000, MONGO_URI, NODE_ENV } = process.env;
 const app = express();
