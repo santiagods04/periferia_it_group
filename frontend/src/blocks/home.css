@@ -1,0 +1,58 @@
+.home {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home__title {
+  font-size: 2.2rem;
+  color: #1c1e21;
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+
+.home__card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 550px;
+  width: 100%;
+}
+
+.home__card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+  color: #050505;
+}
+
+.home__card-message {
+  font-size: 1rem;
+  color: #4b4f56;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.home__card-divider {
+  border: 0;
+  border-top: 1px solid #ebedf0;
+  margin: 15px 0;
+}
+
+.home__card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home__card-author {
+  font-weight: 600;
+  color: #506a6d; 
+  font-size: 0.9rem;
+}
+
+.home__card-date {
+  color: #90949c;
+  font-size: 0.85rem;
+}

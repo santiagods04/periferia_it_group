@@ -63,29 +63,6 @@ a:hover {
   padding: 22px 16px;
 }
 
-.page__title {
-  margin: 10px 0 10px;
-  font-family: var(--font-title);
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: 0.2px;
-}
-
-.page__subtitle {
-  margin: 0 0 18px;
-  color: var(--muted);
-}
-
-
-.link {
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.link:hover {
-  text-decoration: none;
-}
-
 .btn {
   border: var(--border);
   border-radius: 10px;
@@ -106,5 +83,4 @@ a:hover {
 
 .btn--active {
   outline: 2px solid rgba(42, 36, 30, 0.20);
-
 }

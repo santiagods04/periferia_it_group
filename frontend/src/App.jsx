@@ -3,10 +3,12 @@ import { useState } from 'react';
 import AppContext from './context/AppContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const [count, setCount] = useState(0)
-
 
   const contextValue = {
     count,
@@ -18,9 +20,9 @@ function App() {
         <Header />
         <main className="app__main">
           <Routes>
-            <Route path="/" element={<h1>Inicio</h1>} />
-            <Route path="/login" element={<h1>Iniciar Sesión</h1>} />
-            <Route path="/dashboard" element={<h1>Acerca de</h1>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
 
