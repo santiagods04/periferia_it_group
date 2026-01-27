@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import auth from './utils/auth';
 import api from './utils/api';
+import ProtectedRoute from './components/ProtectedRoute';
 import { setToken, removeToken, getToken } from './utils/token';
 
 function App() {
@@ -45,24 +46,23 @@ function App() {
       .then(setCurrentUser)
   };
 
-const handleAddPost = (message) => {; 
+  const handleAddPost = (message) => {
+    api.createPost(message)
+      .then((newPost) => {
+        const postParaUI = {
+          ...newPost,
+          owner: {
+            email: currentUser.email
+          }
+        };
 
-  api.createPost(message)
-    .then((newPost) => {
-      const postParaUI = {
-        ...newPost,
-        owner: {
-          email: currentUser.email
-        }
-      };
-
-      setPosts([postParaUI, ...posts]);
-    })
-    .catch((err) => {
-      console.error("Payload enviado:", message);
-      console.error("Error del servidor:", err);
-    });
-};
+        setPosts([postParaUI, ...posts]);
+      })
+      .catch((err) => {
+        console.error("Payload enviado:", message);
+        console.error("Error del servidor:", err);
+      });
+  };
 
   const handleLogout = () => {
     removeToken();
@@ -87,7 +87,14 @@ const handleAddPost = (message) => {;
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
 
