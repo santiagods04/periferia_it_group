@@ -1,31 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 
 const Home = () => {
-  const publicacion = {
-    titulo: "Nueva actualización de React",
-    mensaje: "Estamos explorando cómo la arquitectura BEM mejora la lectura de nuestros componentes en proyectos grandes.",
-    autor: "Carlos Ruiz",
-    fecha: "26 de enero, 2026"
-  };
+  const { posts } = useContext(AppContext);
 
   return (
     <div className="home">
       <h1 className="home__title">Publicaciones</h1>
 
-      <article className="home__card">
-        <h2 className="home__card-title">{publicacion.titulo}</h2>
-        
-        <p className="home__card-message">
-          {publicacion.mensaje}
-        </p>
+      <div className="home__container">
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <article className="home__card" key={post._id}>
+              <h2 className="home__card-title">Publicación</h2>
 
-        <hr className="home__card-divider" />
+              <p className="home__card-message">
+                {post.message}
+              </p>
 
-        <footer className="home__card-footer">
-          <span className="home__card-author">Escrito por: {publicacion.autor}</span>
-          <time className="home__card-date">{publicacion.fecha}</time>
-        </footer>
-      </article>
+              <hr className="home__card-divider" />
+
+              <footer className="home__card-footer">
+                <span className="home__card-author">
+                  Escrito por: {post.owner?.email || 'Usuario anónimo'}
+                </span>
+                <time className="home__card-date">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </time>
+              </footer>
+            </article>
+          ))
+        ) : (
+          <p className="home__empty">No hay publicaciones disponibles en este momento.</p>
+        )}
+      </div>
     </div>
   );
 };

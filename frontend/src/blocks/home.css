@@ -12,13 +12,39 @@
   font-weight: 800;
 }
 
+.home__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 600px;
+  overflow-y: auto;  
+  padding-right: 10px;
+}
+
+.home__container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.home__container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.home__container::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+}
+
 .home__card {
-  background: #ffffff;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-width: 550px;
-  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  transition: transform 0.2s ease;
+}
+
+.home__card:hover {
+  transform: translateY(-5px);
 }
 
 .home__card-title {
@@ -43,7 +69,8 @@
 .home__card-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  font-size: 0.85rem;
+  color: #888;
 }
 
 .home__card-author {
