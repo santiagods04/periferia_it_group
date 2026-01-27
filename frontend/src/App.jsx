@@ -43,7 +43,6 @@ function App() {
         }
       })
       .then(setCurrentUser)
-      .catch(console.error);
   };
 
   const handleAddPost = (message) => {
