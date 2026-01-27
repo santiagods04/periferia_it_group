@@ -1,9 +1,9 @@
 const { isCelebrateError } = require("celebrate");
 
 module.exports = (err, req, res, next) => {
-  if (err.name === "ValidationError" || err.name === "CastError") {
+  if (err.name === 'ValidationError' || err.name === 'SequelizeValidationError' || err.name === 'CastError') {
     err.statusCode = 400;
-    err.message = err.name === "CastError" ? "ID inválido" : "Datos inválidos";
+    err.message = 'Datos inválidos o ID mal formado';
   }
 
   if (err.name === "DocumentNotFoundError") {
@@ -11,13 +11,9 @@ module.exports = (err, req, res, next) => {
     err.message = "Recurso no encontrado";
   }
 
-  if (err.code === 11000) {
+  if (err.name === "SequelizeUniqueConstraintError") {
     err.statusCode = 409;
-
-    if (err.keyPattern?.email) err.message = "Ese correo ya está registrado";
-    else if (err.keyPattern?.nickname)
-      err.message = "Ese nickname ya está registrado";
-    else err.message = "Dato duplicado";
+    err.message = "Ese correo ya está registrado";
   }
 
   if (isCelebrateError(err)) {

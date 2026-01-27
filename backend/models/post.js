@@ -1,22 +1,18 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+const User = require('./user');
 
-const postSchema = new mongoose.Schema(
-  {
-    message: {
-      type: String,
-      required: true,
-      minlength: 10,
-      maxlength: 280,
-    },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
+const Post = sequelize.define('Post', {
+  message: {
+    type: DataTypes.STRING(280),
+    allowNull: false,
+    validate: {
+      len: [10, 280]
+    }
   }
-);
+});
 
-module.exports = mongoose.model('Post', postSchema);
+Post.belongsTo(User, { as: 'owner', foreignKey: 'ownerId' });
+User.hasMany(Post, { foreignKey: 'ownerId' });
+
+module.exports = Post;

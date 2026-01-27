@@ -10,19 +10,19 @@ const initialUsers = [
 const seedUsers = async () => {
   try {
     for (const userData of initialUsers) {
-      let user = await User.findOne({ email: userData.email });
+      let user = await User.findOne({ where: { email: userData.email } });
 
       if (!user) {
         user = await User.create(userData);
         console.log(`✅ Usuario creado: ${userData.email}`);
       }
 
-      const postExists = await Post.findOne({ owner: user._id });
+      const postExists = await Post.findOne({ where: { ownerId: user.id } });
 
       if (!postExists) {
         await Post.create({
           message: `Hola, soy el post inicial de ${user.email}`,
-          owner: user._id,
+          ownerId: user.id,
         });
         console.log(`📝 Publicación inicial creada para: ${user.email}`);
       }

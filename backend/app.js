@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+const sequelize = require('./config/database');
 const cors = require('cors');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
@@ -34,14 +34,14 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('✅ MongoDB conectado');
-
-    seedUsers();
-
+sequelize.sync({ force: false })
+  .then(async () => {
+    console.log('✅ Conexión exitosa con PostgreSQL y tablas sincronizadas');
+    await seedUsers();
     app.listen(PORT, () => {
       console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
     });
   })
-  .catch((err) => console.error('❌ Error conectando a MongoDB:', err));
+  .catch((err) => {
+    console.error('❌ Error al conectar con PostgreSQL:', err);
+  });
