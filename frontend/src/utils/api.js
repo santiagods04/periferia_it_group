@@ -21,7 +21,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  getUserInfo() {
+  getCurrentUser() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
