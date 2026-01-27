@@ -1,12 +1,47 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const { errors } = require('celebrate');
+const NotFoundError = require('./errors/NotFoundError');
 
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/users');
+const auth = require('./middlewares/auth');
+const seedUsers = require('./scripts/seed');
+const errorHandler = require('./middlewares/errorHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
+const { PORT = 3000, MONGO_URI, NODE_ENV } = process.env;
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.get('/health', (req, res) => {
-  res.json({ ok: true, service: 'bcfia-backend' });
+app.use(cors());
+app.use(express.json());
+app.use(requestLogger);
+
+app.use('/', authRouter);
+
+app.use(auth);
+
+app.use('/users', userRouter);
+
+app.use((req, res, next) => {
+
+  next(new NotFoundError('Recurso no encontrado'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
-});
+app.use(errorLogger);
+app.use(errors());
+app.use(errorHandler);
+
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log('✅ MongoDB conectado');
+
+    seedUsers();
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Servidor escuchando en puerto ${PORT}`);
+    });
+  })
+  .catch((err) => console.error('❌ Error conectando a MongoDB:', err));
