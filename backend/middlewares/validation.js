@@ -15,9 +15,21 @@ const validateLogin = celebrate({
   }),
 });
 
+const validatePost = celebrate({
+  body: Joi.object().keys({
+    message: Joi.string().required().min(10).max(280)
+      .messages({
+        'string.min': 'El mensaje debe tener al menos 10 caracteres',
+        'string.max': 'El mensaje no puede exceder los 280 caracteres',
+        'any.required': 'El mensaje es obligatorio',
+      }),
+  }),
+});
+
 
 module.exports = {
   validateLogin,
+  validatePost,
 };
 
 

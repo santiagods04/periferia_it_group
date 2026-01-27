@@ -7,6 +7,7 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
+const postsRouter = require('./routes/posts')
 const auth = require('./middlewares/auth');
 const seedUsers = require('./scripts/seed');
 const errorHandler = require('./middlewares/errorHandler');
@@ -21,9 +22,8 @@ app.use(requestLogger);
 
 app.use('/', authRouter);
 
-app.use(auth);
-
-app.use('/users', userRouter);
+app.use('/users', auth, userRouter);
+app.use('/posts', postsRouter);
 
 app.use((req, res, next) => {
 
