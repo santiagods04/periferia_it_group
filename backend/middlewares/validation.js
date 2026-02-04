@@ -23,6 +23,13 @@ const validatePost = celebrate({
         'string.max': 'El mensaje no puede exceder los 280 caracteres',
         'any.required': 'El mensaje es obligatorio',
       }),
+  })
+  .unknown(false),
+});
+
+const validatePostId = celebrate({
+  params: Joi.object().keys({
+    postId: Joi.number().integer().positive().required(),
   }),
 });
 
@@ -30,6 +37,7 @@ const validatePost = celebrate({
 module.exports = {
   validateLogin,
   validatePost,
+  validatePostId,
 };
 
 

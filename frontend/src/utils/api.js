@@ -41,6 +41,17 @@ class Api {
       body: JSON.stringify({ message }),
     }).then(this._checkResponse);
   }
+
+  updatePost(postId, message) {
+    return fetch(`${this._url}/posts/${postId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: JSON.stringify({ message }),
+    }).then(this._checkResponse);
+  }
 }
 
 const api = new Api(import.meta.env.VITE_API_URL || 'http://localhost:3000');

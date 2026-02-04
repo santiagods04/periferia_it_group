@@ -64,6 +64,22 @@ function App() {
       });
   };
 
+  const handleUpdatePost = (postId, message) => {
+    return api.updatePost(postId, message)
+      .then((updatedPost) => {
+        setPosts((prevPosts) =>
+          prevPosts.map((post) =>
+            post.id === postId ? updatedPost : post
+          )
+        );
+        return updatedPost;
+      })
+      .catch((err) => {
+        console.error("Error del servidor al actualizar:", err);
+        throw err;
+      });
+  }
+
   const handleLogout = () => {
     removeToken();
     setIsLoggedIn(false);
@@ -77,6 +93,7 @@ function App() {
     handleLogin,
     handleLogout,
     handleAddPost,
+    handleUpdatePost,
   };
 
   return (
